@@ -6,13 +6,16 @@
 > (σ(6)=12) — every design knob answers to that arithmetic.
 >
 > **Status (2026-05-06):** mk1 design package frozen — paper + engineering
-> pack + impact ladder (Mk.I → Mk.V). Silicon tape-out PLANNED.
+> pack + impact ladder (Mk.I → Mk.V) + runnable verify/build/tests/firmware
+> surface. Silicon tape-out PLANNED.
 
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![Spec: mk1](https://img.shields.io/badge/spec-mk1-informational.svg)](core/sscb/spec.md)
 [![Cutoff: 600 ns](https://img.shields.io/badge/cutoff-600ns-brightgreen.svg)](core/sscb/spec.md)
 [![Foundries: 4](https://img.shields.io/badge/foundries-4_KR-blue.svg)](module/engineering_pack/README.md)
-[![BOM: $35](https://img.shields.io/badge/BOM-%2435-yellow.svg)](module/engineering_pack/README.md)
+[![BOM: $30.77](https://img.shields.io/badge/BOM-%2430.77-yellow.svg)](module/engineering_pack/README.md)
+[![Verify: 10/10](https://img.shields.io/badge/verify-10%2F10-brightgreen.svg)](verify/sscb_verify.py)
+[![Audit: 10/10](https://img.shields.io/badge/audit-10%2F10-brightgreen.svg)](verify/cross_doc_audit.py)
 
 > **Distribution**: GitHub canonical at <https://github.com/need-singularity/hexa-sscb>.
 > Origin: extracted from `n6-architecture/domains/compute/sscb/` 2026-05-06.
@@ -24,12 +27,14 @@
 `hexa-sscb` is a **solid-state DC circuit breaker** that interrupts a 48 V / 100 A
 bus fault in **600 ns** — roughly 48,000× faster than a 30 ms electromechanical
 breaker, with no contact-arc plasma column, and a Bill-of-Materials that
-maps cleanly onto **four Korean foundry deliverables**:
+maps cleanly onto **four Korean foundry deliverables** (.own own 2):
 
-1. **SiC MOSFET die** — main interrupter (Power Cube 7 / DBHi-Tek)
-2. **BCD 180 nm gate driver** — DongbuHiTek / SK Key Foundry
-3. **Σ-Δ ADC + comparator** — MagnaChip
-4. **Cortex-M4 MCU + firmware** — SK Hynix system-IC line
+1. **SiC MOSFET die** — main interrupter, **YESPOWER** (예스파워테크닉스), 1200 V / 30 mΩ planar, 200 mm MPW
+2. **BCD 180 nm gate driver** — **DB HiTek** (DB하이텍), 0.18 µm BCD 5M1P
+3. **Σ-Δ ADC 24-bit + comparator** — **SK Key Foundry** (SK키파운드리), 0.18 µm CMOS 1.8 V/5 V
+4. **Cortex-M4 MCU + firmware** — **Samsung Foundry** (삼성파운드리) 40 nm; mk1 commercial fallback STM32F429ZIT6
+
+Packaging by **AT&S Signetics** (시그네틱스) — EDiP SiP + DBC AlN + Ag-sintered Cu interconnect.
 
 The n=6 lattice is not decorative. It is the **falsification budget**:
 - cutoff_ns ≡ 6 × 100 ns
@@ -57,12 +62,15 @@ hexa-sscb/
 ├── module/
 │   ├── engineering_pack/
 │   │   └── README.md                  ← 754-line build package (BOM/PCB/firmware/test)
-│   └── impact/
-│       └── README.md                  ← Mk.I → Mk.V impact ladder (§21+§22)
-├── .own                              ← project-local SSOT (mk2 own_v1) — invariants + roles + directives
-├── verify/                           ← invariant audit (Python stdlib)
-├── build/                            ← pandoc PDF rebuild
-├── tests/                            ← pytest acceptance scaffold
+│   ├── impact/
+│   │   └── README.md                  ← Mk.I → Mk.V impact ladder (§21+§22)
+│   └── firmware/                      ← STM32F429 reference (CMSIS-only, host syntax-clean)
+│       ├── src/, include/, linker/, startup/
+│       └── Makefile                   ← arm-none-eabi-gcc cross-compile
+├── .own                               ← project-local SSOT (mk2 own_v1) — invariants + roles + directives
+├── verify/                            ← invariant audit (Python stdlib)
+├── build/                             ← pandoc PDF rebuild
+├── tests/                             ← pytest acceptance scaffold
 └── doc/
     ├── archive/                       ← Korean predecessor + paper backup
     └── lineage/                       ← origin manifest + commit refs
@@ -101,6 +109,21 @@ make -C module/firmware all          # cross-compile firmware.elf (requires arm-
 pytest tests/ -v                     # acceptance scaffold; bench-only items skip with reason
 ```
 
+### Last validation sweep — 2026-05-06
+
+| Check | Result | Notes |
+|---|---|---|
+| `verify/sscb_verify.py` | ✅ 10/10 PASS | §7.1 turnoff 266 ns / §7.9 BOM $31.50 / §7.10 schedule 12 mo |
+| `verify/cross_doc_audit.py` | ✅ 10/10 PASS | cutoff_ns ≡ 600, 4-foundry stack present in spec+domain+engpack, σ(6)=12, Mk-ladder monotone |
+| `verify/bom_lattice.py` | ✅ PASS | 19 engpack rows → σ(6)=12 lattice, total $30.77 ≤ $35 |
+| `pytest tests/` | ✅ 4 passed / 17 bench-skipped / 0 failed | A-2 / A-3 / A-8 + source-checklist auto-pass; T-1..T-9 / T-10 / A-1 / A-4..A-7 skip with bench reason |
+| `make -C build all` | ✅ 3 PDFs built | `sscb_mk1.pdf` 98 KB · `_engineering_pack.pdf` 152 KB · `_impact.pdf` 58 KB (`.gitignore`'d, not committed) |
+| `module/firmware/` host syntax | ✅ `clang -fsyntax-only` clean | ARM cross-compile (`make -C module/firmware all`) gated on `arm-none-eabi-gcc` install |
+| `.own` schema | ✅ own 1/2/3 declared | n=6 master identity · 4-foundry contractual · doc-first scope guard |
+
+Re-run the sweep after any spec or BOM edit. `verify/` exits non-zero on
+drift; `tests/` skip-but-not-fail on unverified bench items.
+
 ---
 
 ## Architecture (one-line)
@@ -137,8 +160,11 @@ Each slice is independently bench-falsifiable.
 ## Lineage
 
 This repository is a **forensic extraction** from the n6-architecture
-monorepo. See [`doc/lineage/origin.md`](doc/lineage/origin.md) for the exact
-commits and source paths each file was pulled from. Two of the four source
-markdowns were recovered from a deletion commit (`a489a368`, 2026-04-21).
+monorepo (2026-05-06). See [`doc/lineage/origin.md`](doc/lineage/origin.md)
+for the exact commits and source paths each file was pulled from. Two of
+the four source markdowns were recovered from a deletion commit
+(`a489a368`, 2026-04-21); the agent-scope content originally recovered as
+`ai-native/CLAUDE.md` was reorganized into [`/.own`](.own) (hive raw.mk2
+own_v1) on 2026-05-06.
 
 License: Apache-2.0.
