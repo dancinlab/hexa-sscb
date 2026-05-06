@@ -16,6 +16,7 @@
 [![BOM: $30.77](https://img.shields.io/badge/BOM-%2430.77-yellow.svg)](module/engineering_pack/README.md)
 [![Verify: 10/10](https://img.shields.io/badge/verify-10%2F10-brightgreen.svg)](verify/sscb_verify.py)
 [![Audit: 10/10](https://img.shields.io/badge/audit-10%2F10-brightgreen.svg)](verify/cross_doc_audit.py)
+[![Firmware: builds](https://img.shields.io/badge/firmware-cross--compile-brightgreen.svg)](module/firmware/)
 
 > **Distribution**: GitHub canonical at <https://github.com/need-singularity/hexa-sscb>.
 > Origin: extracted from `n6-architecture/domains/compute/sscb/` 2026-05-06.
@@ -118,7 +119,7 @@ pytest tests/ -v                     # acceptance scaffold; bench-only items ski
 | `verify/bom_lattice.py` | ✅ PASS | 19 engpack rows → σ(6)=12 lattice, total $30.77 ≤ $35 |
 | `pytest tests/` | ✅ 4 passed / 17 bench-skipped / 0 failed | A-2 / A-3 / A-8 + source-checklist auto-pass; T-1..T-9 / T-10 / A-1 / A-4..A-7 skip with bench reason |
 | `make -C build all` | ✅ 3 PDFs built | `sscb_mk1.pdf` 98 KB · `_engineering_pack.pdf` 152 KB · `_impact.pdf` 58 KB (`.gitignore`'d, not committed) |
-| `module/firmware/` host syntax | ✅ `clang -fsyntax-only` clean | ARM cross-compile (`make -C module/firmware all`) gated on `arm-none-eabi-gcc` install |
+| `module/firmware/` ARM cross-compile | ✅ `firmware.elf` 1996 B text · 3096 B BSS · ~5 KB total | `arm-none-eabi-gcc 16.1.0` (brew bare-metal) + `-ffreestanding` + repo-local `include/freestanding/stdint.h` shim — no newlib needed; on-target run still requires STM32F429 board + ST-Link |
 | `.own` schema | ✅ own 1/2/3 declared | n=6 master identity · 4-foundry contractual · doc-first scope guard |
 
 Re-run the sweep after any spec or BOM edit. `verify/` exits non-zero on

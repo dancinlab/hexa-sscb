@@ -10,7 +10,7 @@
 | Verified here | Not verified here |
 |---|---|
 | Source-level integrity: every `engineering_pack` §5 function, struct, and macro is present and self-consistent | On-target behavior: 600 ns trip latency, T-1..T-9 acceptance |
-| Host cross-compile to `firmware.elf` (build-time check only) | Hardware bring-up: requires STM32F429ZIT6 board + ST-Link |
+| **ARM cross-compile to `build/firmware.elf`** (verified 2026-05-06: 1996 B text, 3096 B BSS, ~5 KB total) | Hardware bring-up: requires STM32F429ZIT6 board + ST-Link |
 | Memory map within stm32f429zi (`linker/stm32f429zi.ld`) | Closed-loop response: requires Pearson 110A + Tektronix MSO64 |
 | Identifier sync with `engineering_pack` §5 / domain.md §13 | UL 489B short-circuit interrupt: requires 5 kA pulsed source jig |
 
@@ -44,8 +44,8 @@ module/firmware/
 ## Build
 
 ```bash
-brew install --cask gcc-arm-embedded     # macOS
-# or: sudo apt install gcc-arm-none-eabi  # Debian/Ubuntu
+brew install arm-none-eabi-gcc arm-none-eabi-binutils     # macOS (Apple Silicon / Intel)
+# or: sudo apt install gcc-arm-none-eabi                  # Debian/Ubuntu
 
 make -C module/firmware check    # toolchain check
 make -C module/firmware all      # → build/firmware.elf, .bin, .hex
@@ -54,6 +54,16 @@ make -C module/firmware clean
 ```
 
 Targets `build/firmware.elf` etc. are `.gitignore`'d.
+
+**Bare-metal toolchain note:** brew's `arm-none-eabi-gcc` ships without
+newlib/picolibc, so the build uses `-ffreestanding` plus a minimal
+[`include/freestanding/stdint.h`](include/freestanding/stdint.h) shim
+that supplies just the fixed-width int typedefs ISO C99 requires.
+Linkage pulls compiler runtime helpers from `libgcc.a` (e.g.
+`__aeabi_uldivmod` for the 64-bit RMS divide). If you swap to a
+toolchain that bundles newlib (Arm's official one, or
+gcc-arm-none-eabi from apt), the shim becomes unnecessary — delete
+`include/freestanding/` and remove the `-isystem` line from the Makefile.
 
 ## Sync policy with engineering_pack §5
 

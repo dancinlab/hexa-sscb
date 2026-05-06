@@ -20,6 +20,8 @@ LDSCRIPT := linker/stm32f429zi.ld
 
 CFLAGS := \
   -mcpu=$(CPU) -mthumb -mfpu=$(FPU) -mfloat-abi=$(FLOAT) \
+  -ffreestanding \
+  -isystem include/freestanding \
   -Iinclude \
   -ffunction-sections -fdata-sections \
   -O2 -Wall -Wextra -std=c99 -g
@@ -33,8 +35,7 @@ LDFLAGS := \
   -T$(LDSCRIPT) \
   -Wl,--gc-sections \
   -Wl,-Map=build/firmware.map \
-  --specs=nano.specs --specs=nosys.specs \
-  -nostartfiles
+  -nostdlib -nostartfiles -ffreestanding
 
 C_SRC := $(wildcard src/*.c)
 S_SRC := $(wildcard startup/*.s)
@@ -54,7 +55,7 @@ build/%.o: startup/%.s | build
 	$(CC) $(ASFLAGS) -c $< -o $@
 
 build/firmware.elf: $(OBJS) $(LDSCRIPT) | build
-	$(LD) $(LDFLAGS) $(OBJS) -o $@
+	$(LD) $(LDFLAGS) $(OBJS) -lgcc -o $@
 	$(SIZE) $@
 
 build/firmware.bin: build/firmware.elf
