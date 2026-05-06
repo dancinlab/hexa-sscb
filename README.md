@@ -9,7 +9,7 @@
 > pack + impact ladder (Mk.I → Mk.V) + runnable verify/build/tests/firmware
 > surface. Silicon tape-out PLANNED.
 
-[![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Spec: mk1](https://img.shields.io/badge/spec-mk1-informational.svg)](core/sscb/spec.md)
 [![Cutoff: 600 ns](https://img.shields.io/badge/cutoff-600ns-brightgreen.svg)](core/sscb/spec.md)
 [![Foundries: 4](https://img.shields.io/badge/foundries-4_KR-blue.svg)](module/engineering_pack/README.md)
@@ -54,7 +54,7 @@ falsifiable on the test bench (see §11 ACCEPTANCE in the engineering pack).
 hexa-sscb/
 ├── README.md                          ← this file (public landing)
 ├── README.ai.md                       ← AI-native handoff (raw 271)
-├── LICENSE                            ← Apache-2.0
+├── LICENSE                            ← MIT
 ├── core/
 │   └── sscb/
 │       ├── spec.md                    ← inaugural paper (387 lines)
@@ -181,4 +181,4 @@ the four source markdowns were recovered from a deletion commit
 `ai-native/CLAUDE.md` was reorganized into [`/.own`](.own) (hive raw.mk2
 own_v1) on 2026-05-06.
 
-License: Apache-2.0.
+License: MIT.
