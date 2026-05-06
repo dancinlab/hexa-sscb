@@ -1,0 +1,108 @@
+# ---
+# schema_version: project/own/v1
+# last_updated: 2026-05-06
+# mk: 2
+# ---
+#
+# # hexa-sscb/.own (mk2)
+#
+# Schema authority: hive/spec/schema/own_v1.schema.yaml
+# Format: mk2 frontmatter (#-prefixed YAML) + comment-section markdown headers
+# + mk1 raw-format body (`own N <status> "name"` blocks). raw_loader.hexa
+# silently skips all `#`-prefixed lines so the body parses unchanged.
+# Authoritative rule content remains in `own N <status> ...` blocks below.
+#
+# This repo is the public distribution form of HEXA-SSCB mk1, extracted from
+# n6-architecture/domains/compute/sscb/ on 2026-05-06 and renamed sscb →
+# hexa-sscb the same day. Source-of-truth for the spec stays upstream
+# (n6-architecture/domains/compute/sscb/sscb.md); this repo extracts a
+# frozen snapshot plus runnable artifacts (verify/, build/, tests/,
+# module/firmware/). Replaces the deleted ai-native/CLAUDE.md (per user
+# directive 2026-05-06: "claude.md 금지 -> .own 활용").
+#
+# ## roles
+# - dancinlife (project owner)
+# - claude opus / sonnet / haiku (AI agents — autonomous within own baselines)
+#
+# ## baselines
+# - n6-architecture canonical SSOT — extraction consumer (sync mapping in doc/lineage/origin.md)
+# - core/sscb/ directory name preserved post-rename — must stay 1:1 with upstream domains/compute/sscb/
+# - doc/archive/* immutable verbatim (Korean predecessor + paper backup; never retranslate, never edit *.md.bak)
+# - doc-first repo with thin runnable surface (verify/ + build/ + tests/ + module/firmware/ only)
+#
+# ## project_directives
+# - n=6 master identity invariant: cutoff_ns ≡ 6×100, foundry_count ≡ τ(6)=4, bom_lines ≡ σ(6)=12, redundancy ≡ φ(6)+τ(6)=6 — never changed without restating the lattice equality (own 1)
+# - 4-foundry Korean stack contractual: SiC YESPOWER / BCD DB HiTek / Σ-Δ SK키파운드리 / Cortex-M4 Samsung 40nm — never silently substitute Western foundry (own 2)
+# - code permitted ONLY in verify/, build/, tests/, module/firmware/ — new code locations require README + .own update before the implementing PR (own 3)
+# - core/sscb/domain.md = SSOT for numbers — module/* and code derive; if numbers disagree domain.md wins
+# - Mk-ladder monotone Mk.I→Mk.V — voltage/current increase, cutoff decrease, year increase; never insert Mk.X regression below an existing Mk
+# - additive-only at doc layer — additions OK, renames/moves require doc/lineage/origin.md update + redirect note
+# - upstream sync mapping: spec.md ↔ n6-architecture/papers/sscb-mk1-2026-05-04.md, domain.md ↔ domains/compute/sscb/sscb.md, impact ↔ same §21+§22; engineering_pack has no live upstream path (recover from history if needed)
+#
+# ## cross_link_to_specs
+# - hive/spec/schema/own_v1.schema.yaml — THIS schema authority
+# - hive/spec/mk2_apex.spec.yaml — orchestrator
+# - hive/spec/ai_native_module_architecture.spec.yaml — core+module+ai-native triplet pattern (raw 270/271/272/273 + arch.001)
+#
+# ## cross_link_to_raws
+# - raw 0 (root-ssot) — .raw + .own + .guide triad
+# - raw 20 (own-monotonic) — own slug matching raw slug MUST strengthen
+# - raw 91 (honest-c3-disclosure) — process-quality + honest C1-C5
+# - raw 270/271/272/273 (core+module 4-rule cluster) — core/<feature>/ + module/<feature>/ + README.ai.md triplet pattern
+# - mk2.arch.001 — hive raw.mk2 arch.001 collapsed pattern (this repo's structural baseline)
+#
+# ## recent_strengthenings
+# - 2026-05-06: repo + folder rename sscb → hexa-sscb (post-extraction). core/sscb/ directory name preserved for n6 upstream sync (1:1 with upstream path).
+# - 2026-05-06: ai-native/CLAUDE.md retired per user directive ("claude.md 금지 -> .own 활용"). Agent scope content reorganized into this .own (mk2 schema). README.md / README.ai.md hierarchy diagrams updated. ai-native/ directory removed.
+# - 2026-05-06: own 1/2/3 land — n=6 master identity, 4-foundry Korean stack contractual, doc-first scope guard with 4 code-permitted directories.
+
+# hexa-sscb/.own — project-local SSOT layer
+# 포맷: raw-format (.raw 와 동일 파서). 자세한 스펙: hive/self/raw_loader.hexa
+# 검증: tool/own_lint.hexa — 추가 규칙이 .raw 와 같은 slug 를 가지면 monotonic
+#       strengthening (status 강화 + scope 전 계승 + enforce/proof 가산) 이어야 한다.
+
+own 1 new "hexa-sscb-n6-master-identity — n=6 격자 4 식별자가 모든 surface 에서 일치"
+  slug hexa-sscb-n6-master-identity
+  scope hexa-sscb 전체 — core/sscb/spec.md, core/sscb/domain.md, module/engineering_pack/, module/impact/, verify/, tests/. README badge / 다이어그램 / BOM 표 / Mk-ladder 표 등 모든 .md 와 코드.
+  enforce raw:os-lock
+  enforce-layer hard
+  enforce-layer-rationale 격자 식별자는 verify/cross_doc_audit.py 가 자동 검증 (cutoff_ns 모든 등장 위치 == 600, foundry_count == 4 + 4-foundry 이름이 4 doc 모두에 등장, bom_lines σ(6)=12 격자, redundancy φ(6)+τ(6)=6). 위반 시 비-0 exit + 어긋난 위치 출력. 본 own 은 그 verifier 의 SSOT.
+  decl cutoff_ns ≡ 6 × 100 = 600 (sense 1 + compute 2 + drive 2 + channel 1 = 6 stages × 100ns)
+  decl foundry_count ≡ τ(6) = 4 (YESPOWER SiC / DB HiTek BCD / SK키파운드리 Σ-Δ / Samsung 40nm Cortex-M4)
+  decl bom_lines ≡ σ(6) = 12 (9 active component class + 3 reserved sigma-slack slots; spec.md §17 ↔ engineering_pack §9 19-row 매핑은 verify/bom_lattice.py)
+  decl redundancy_depth ≡ φ(6) + τ(6) = 6 (6-stage cutoff path)
+  why n=6 격자는 디자인 모티프가 아니라 falsification budget. 격자 식별자가 어긋나면 paper / engineering pack / impact ladder 의 모든 숫자 신뢰성이 무너짐. 4 doc 이 frozen 상태인 현재, 어긋남을 자동 체크하지 않으면 module/* 또는 verify/ 코드가 silently drift 가능.
+  note 격자 식별자 SSOT = core/sscb/domain.md. spec.md 와 engineering_pack/impact 가 어긋나면 domain.md 가 이긴다. 문서 수정 시 domain.md 부터 갱신 → spec.md/engineering_pack/impact → 마지막에 verify/cross_doc_audit.py 의 expected 값 갱신.
+  promoted-at 2026-05-06
+
+own 2 new "hexa-sscb-korean-foundry-stack-contractual — 4 한국 파운드리 스택 계약적, 외산 silent substitute 금지"
+  slug hexa-sscb-korean-foundry-stack-contractual
+  scope module/engineering_pack/README.md §9 BOM, core/sscb/spec.md §17 BOM, core/sscb/domain.md §17, module/impact/README.md (Mk.I~Mk.V 가 모두 한국 4-stack 위에서 진화한다는 가정).
+  enforce raw:os-lock
+  enforce-layer hard
+  enforce-layer-rationale 4-foundry 명단은 verify/cross_doc_audit.py 가 자동 검증 (4 doc 모두에 4 foundry 이름 등장 확인). 외산 substitute 가 BOM 에 들어오면 "domestication ratio 85% → 100% by Mk.IV" 약속이 무너지므로 hard.
+  decl 주 전력단 SiC MOSFET — YESPOWER (예스파워테크닉스), 1200V/30mΩ planar, 200mm MPW
+  decl 게이트 드라이버 BCD — DB HiTek (DB하이텍), 0.18 µm BCD 5M1P, MPW 셔틀
+  decl Σ-Δ ADC 24-bit + 비교기 — SK키파운드리 (SK Key Foundry), 0.18 µm CMOS 1.8V/5V dual
+  decl 제어 MCU Cortex-M4 — Samsung 40nm (mk1 commercial fallback STM32F429ZIT6, 추후 Samsung 40nm tape-out)
+  decl 패키징 SiP — AT&S Signetics (시그네틱스) EDiP + DBC AlN sintered Cu interconnect
+  why mk1 의 "85% domestication, 100% by Mk.IV" 약속은 4-foundry 한국 스택 위에서만 의미 있다. Wolfspeed/Infineon SiC 으로 substitute 하면 mk1 → Mk-∞ 두-단 로켓의 첫 단 (YesPower custom MPW 라인 개설) 이 무너짐. impact §22 의 두 질문 답 (YesPower 가 custom 라인 열 것인가 / 정부·현대·한화에 "있다" 답할 수 있는가) 도 한국 스택 가정 위에 있다.
+  decl substitute 허용 조건: 단일 foundry capacity outage 시 Mk.II 직전까지 임시 외산 second-source 허용, 단 BOM 표 명시 + impact §21.mk1 의 "85%" 수치 갱신 + domain.md §18 Vendor 표 갱신 동시 land.
+  note 4-foundry 이름 한글/영문 표기 변동 (예: "예스파워" vs "YESPOWER" vs "예스파워테크닉스") 은 verifier 검증 대상이 아님 — verifier 는 영문 base name (YESPOWER / DB HiTek / SK / Samsung) 만 확인.
+  promoted-at 2026-05-06
+
+own 3 new "hexa-sscb-doc-first-code-scope — 코드는 verify/ build/ tests/ module/firmware/ 4 위치에서만 허용"
+  slug hexa-sscb-doc-first-code-scope
+  scope hexa-sscb repo 전체. 모든 *.py / *.c / *.h / *.S / *.s / Makefile / *.kicad_pcb / *.tex / pyproject.toml 등 코드성 파일.
+  enforce raw:os-lock
+  enforce-layer hard
+  enforce-layer-rationale 4 위치 외에 코드 추가 시 verify/cross_doc_audit.py 의 'rogue code' 체크가 차단. doc-first 정체성은 hive raw.mk2 arch.001 의 core/<feature>/ + module/<feature>/ + README.ai.md 패턴 핵심 — 임의 위치 코드 추가는 패턴 깨짐.
+  decl 허용 위치 1: verify/ — runnable invariant audit (Python stdlib only)
+  decl 허용 위치 2: build/ — pandoc PDF rebuild (Makefile + LaTeX template)
+  decl 허용 위치 3: tests/ — pytest acceptance scaffold
+  decl 허용 위치 4: module/firmware/ — STM32F4 reference (CMSIS-only; host cross-compile)
+  decl 새 코드 위치 추가 절차: README.md "Module inventory" 표 + README.ai.md "Hierarchy" 다이어그램 + 본 own entry decl 4 위치 갱신을 코드 PR 보다 먼저 land.
+  why doc-first 는 마케팅이 아니라 작자 정책. 4 도메인 (verify/build/tests/firmware) 는 "spec 자동 검증" + "잃어버린 PDF 복원" + "ACCEPTANCE checklist 자동화" + "engineering_pack §5 firmware reference 구현" 4 가지 명확한 목적. 다른 위치에 코드가 들어오면 spec drift 위험 + 의도 모호해짐.
+  decl 면제: doc/ 내부의 lineage / archive 경로는 코드 아님 (.md 만). LICENSE / README*.md / .gitignore / .own / 본 own 에 명시된 4 위치는 면제 자동.
+  note doc/archive/* 는 immutable — 본 own 의 4 허용 위치와 무관하게 "절대 수정 금지" 가 우선 (raw 91 honest C3, doc/archive 는 forensic continuity 스냅샷). 4 코드 위치 안에서도 archive 참조는 read-only.
+  promoted-at 2026-05-06

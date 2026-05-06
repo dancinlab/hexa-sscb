@@ -5,6 +5,13 @@ This repository was extracted from the **n6-architecture** monorepo on
 each file was pulled from, so that any change in this repo can be traced
 back to (or propagated upstream to) the source-of-truth.
 
+> **2026-05-06 (post-extraction)**: repository renamed `sscb` → `hexa-sscb`
+> on GitHub and locally. Upstream path `n6-architecture/domains/compute/sscb/`
+> and the local `core/sscb/` directory keep their original names — they are
+> the n=6 lattice identity reference and must remain 1:1 with the upstream
+> SSOT for sync purposes. Only the repo root and public-facing self-references
+> were renamed.
+
 ## Upstream
 
 - Repo: `n6-architecture` (local working copy at `~/core/n6-architecture`)
@@ -21,7 +28,7 @@ back to (or propagated upstream to) the source-of-truth.
 | `core/sscb/domain.md` | `domains/compute/sscb/sscb.md` | working tree (HEAD `b0a45476`) | Full domain doc, currently 1320 lines. Last substantive content commit: `068e84da` (§21 IMPACT reverse-chronological restructure). |
 | `module/engineering_pack/README.md` | `domains/compute/sscb/sscb_engineering_pack_bak.md` | parent of `a489a368` (deletion commit, Apr 21 2026) | **Recovered from history.** Removed by commit `a489a368` ("English-only public landing header") which deleted both `_bak.md` files. |
 | `module/impact/README.md` | `domains/compute/sscb/sscb.md` §21 IMPACT + §22 | working tree (HEAD `b0a45476`) | Extracted as a free-standing module from `domain.md` lines 1121–end. |
-| `ai-native/CLAUDE.md` | `domains/compute/sscb/CLAUDE.md` | parent of `ea1bfc97` (purge commit) | **Recovered from history.** Purged by commit `ea1bfc97` ("AG10: purge CLAUDE.md + .claude/settings.json — hexa-only harness"). Adapted for repo-local context. |
+| `.own` (replaces deleted `ai-native/CLAUDE.md`) | `domains/compute/sscb/CLAUDE.md` | parent of `ea1bfc97` (purge commit) | `ai-native/CLAUDE.md` was first **recovered from history** (purged by commit `ea1bfc97` "AG10: purge CLAUDE.md + .claude/settings.json — hexa-only harness"), then **deleted again on 2026-05-06** per user directive ("claude.md 금지 → .own 활용"). Agent-scope content reorganized into project-root `.own` (hive raw.mk2 own_v1 schema). |
 | `doc/archive/sscb_mk1_predecessor_korean.md` | `domains/compute/sscb/sscb_bak.md` | parent of `a489a368` | **Recovered from history.** Korean-language predecessor of the current `domain.md`. Preserved verbatim. |
 | `doc/archive/sscb_mk1_paper_2026-05-04.md.bak` | `raw_archive/2026-05-04T/papers/sscb-mk1-2026-05-04.md.bak` | working tree | Paper backup snapshot. Preserved verbatim. |
 

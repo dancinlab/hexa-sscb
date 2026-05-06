@@ -1,4 +1,4 @@
-# sscb — AI-native handoff
+# hexa-sscb — AI-native handoff
 
 > Conformance: hive raw 271 (readme-ai-native-mandate). This file is the
 > canonical entry point for AI agents (Claude / Hexa / etc.) operating
@@ -6,7 +6,7 @@
 
 ## Identity
 
-- **Name**: `sscb` (Solid-State Circuit Breaker, HEXA-SSCB mk1)
+- **Name**: `hexa-sscb` (Solid-State Circuit Breaker, HEXA-SSCB mk1)
 - **Axis**: `compute`
 - **n=6 lattice**:
   - cutoff_ns ≡ 6 × 100 ns = 600 ns
@@ -14,20 +14,23 @@
   - bom_lines ≡ σ(6) = 12
   - redundancy_depth ≡ φ(6) + τ(6) = 6
 - **Parent (canonical SSOT)**: `n6-architecture/domains/compute/sscb/sscb.md`
-- **Distribution**: `https://github.com/need-singularity/sscb` (public)
+- **Distribution**: `https://github.com/need-singularity/hexa-sscb` (public)
 
 ## Hierarchy (canonical pattern)
 
 ```
-sscb/                        T0 (repo root)
+hexa-sscb/                   T0 (repo root)
 ├── core/sscb/               T1 (single-feature core)
 │   ├── spec.md              ← paper (canonical short form)
 │   └── domain.md            ← full domain spec (canonical long form)
 ├── module/                  T2 (per-module fan-out)
 │   ├── engineering_pack/    ← build package (BOM / PCB / FW / test)
-│   └── impact/              ← Mk-ladder IMPACT (§21 + §22)
-├── ai-native/               T0 (AI-only artifacts)
-│   └── CLAUDE.md            ← agent scope + invariants
+│   ├── impact/              ← Mk-ladder IMPACT (§21 + §22)
+│   └── firmware/            ← STM32F4 reference (CMSIS-only)
+├── verify/                  T0 (runnable invariant audit, stdlib Python)
+├── build/                   T0 (pandoc PDF rebuild)
+├── tests/                   T0 (pytest acceptance scaffold)
+├── .own                     T0 (project-local SSOT, mk2 own_v1 — invariants + roles + directives)
 └── doc/                     T0 (human-only archive + lineage)
 ```
 
@@ -64,9 +67,12 @@ modules; cross-module references go through T1 (`core/sscb/`).
 |---|---|
 | Add a new Mk variant | `module/impact/README.md` (then propagate to `core/sscb/domain.md` §21) |
 | Tighten a cutoff-time number | `core/sscb/spec.md` §2 + `module/engineering_pack/README.md` §1 |
-| Adjust BOM | `module/engineering_pack/README.md` §9, then verify σ(6)=12 still holds |
-| Change firmware logic | `module/engineering_pack/README.md` §13 |
-| Add acceptance test | `module/engineering_pack/README.md` §11 ACCEPTANCE |
+| Adjust BOM | `module/engineering_pack/README.md` §9, then verify σ(6)=12 still holds via `verify/bom_lattice.py` |
+| Change firmware logic | `module/engineering_pack/README.md` §13, then mirror in `module/firmware/src/fault_handler.c` |
+| Add acceptance test | `module/engineering_pack/README.md` §11 ACCEPTANCE, then add a `tests/test_acceptance.py` case |
+| Run invariant check | `python3 verify/sscb_verify.py && python3 verify/cross_doc_audit.py` (exit 0 required) |
+| Rebuild lost PDFs | `make -C build all` (regenerates 3 KakaoTalk-shared PDFs from .md) |
+| Cross-compile firmware | `make -C module/firmware all` (host-only; target run requires STM32F429 + scope) |
 
 ## Lineage tag
 

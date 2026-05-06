@@ -1,0 +1,8 @@
+% xeCJK setup for SSCB mk1 PDFs (Korean body + Hangul tables/diagrams).
+% Included via pandoc --include-in-header so we ride on pandoc's stock
+% default.latex template (which already handles tables, code highlighting,
+% pandoc 3.x calc/array boilerplate).
+\usepackage{xeCJK}
+\setCJKmainfont[BoldFont={Apple SD Gothic Neo Bold},ItalicFont={Apple SD Gothic Neo}]{Apple SD Gothic Neo}
+\setCJKmonofont{Apple SD Gothic Neo}
+\setmonofont[Scale=0.88]{Menlo}

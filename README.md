@@ -1,4 +1,4 @@
-# sscb — Solid-State Circuit Breaker (HEXA-SSCB mk1)
+# hexa-sscb — Solid-State Circuit Breaker (HEXA-SSCB mk1)
 
 > 600 ns DC fault interruption for 48 V / 100 A buses. SiC MOSFET + BCD 180 nm
 > + Σ-Δ ADC + Cortex-M4, packaged as a 4-foundry SiP. **n=6 master identity**
@@ -14,14 +14,14 @@
 [![Foundries: 4](https://img.shields.io/badge/foundries-4_KR-blue.svg)](module/engineering_pack/README.md)
 [![BOM: $35](https://img.shields.io/badge/BOM-%2435-yellow.svg)](module/engineering_pack/README.md)
 
-> **Distribution**: GitHub canonical at <https://github.com/need-singularity/sscb>.
+> **Distribution**: GitHub canonical at <https://github.com/need-singularity/hexa-sscb>.
 > Origin: extracted from `n6-architecture/domains/compute/sscb/` 2026-05-06.
 
 ---
 
-## What is sscb?
+## What is hexa-sscb?
 
-`sscb` is a **solid-state DC circuit breaker** that interrupts a 48 V / 100 A
+`hexa-sscb` is a **solid-state DC circuit breaker** that interrupts a 48 V / 100 A
 bus fault in **600 ns** — roughly 48,000× faster than a 30 ms electromechanical
 breaker, with no contact-arc plasma column, and a Bill-of-Materials that
 maps cleanly onto **four Korean foundry deliverables**:
@@ -45,7 +45,7 @@ falsifiable on the test bench (see §11 ACCEPTANCE in the engineering pack).
 ## Repository layout
 
 ```
-sscb/
+hexa-sscb/
 ├── README.md                          ← this file (public landing)
 ├── README.ai.md                       ← AI-native handoff (raw 271)
 ├── LICENSE                            ← Apache-2.0
@@ -59,8 +59,10 @@ sscb/
 │   │   └── README.md                  ← 754-line build package (BOM/PCB/firmware/test)
 │   └── impact/
 │       └── README.md                  ← Mk.I → Mk.V impact ladder (§21+§22)
-├── ai-native/
-│   └── CLAUDE.md                      ← AI-agent scope + invariants
+├── .own                              ← project-local SSOT (mk2 own_v1) — invariants + roles + directives
+├── verify/                           ← invariant audit (Python stdlib)
+├── build/                            ← pandoc PDF rebuild
+├── tests/                            ← pytest acceptance scaffold
 └── doc/
     ├── archive/                       ← Korean predecessor + paper backup
     └── lineage/                       ← origin manifest + commit refs
@@ -81,6 +83,23 @@ repositories.
 | [`core/sscb/domain.md`](core/sscb/domain.md) | Full domain doc — exec summary, system reqs, architecture, circuit, PCB, firmware, mechanical, manufacturing, test, BOM, vendor, acceptance, appendix, IMPACT | 1320 |
 | [`module/engineering_pack/`](module/engineering_pack/README.md) | Hand-off build package — every number derivable, every claim falsifiable, stdlib-only Python verification appendix | 754 |
 | [`module/impact/`](module/impact/README.md) | §21 IMPACT ladder Mk.I → Mk.V (2026 → 2030) + §22 reduction to two practical questions | 200 |
+| [`module/firmware/`](module/firmware/README.md) | STM32F4 reference firmware (CMSIS-only, host cross-compile) — engineering_pack §5 / domain.md §13 materialized | code |
+| [`verify/`](verify/) | Runnable invariant audit — domain.md §7 11-subsection physics check + cross-document n=6 consistency + BOM σ(6)=12 lattice reduction | code |
+| [`build/`](build/) | Pandoc Makefile + xeCJK LaTeX template — rebuilds the three KakaoTalk-shared PDFs from the .md sources | code |
+| [`tests/`](tests/) | pytest scaffold for §16 T-1..T-10 + §19 A-1..A-10 acceptance — bench-only items skipped with reason, doc-bench-independent items auto-run | code |
+
+---
+
+## Build & verify
+
+```bash
+python3 verify/sscb_verify.py        # 10/10 PASS expected (exit 0)
+python3 verify/cross_doc_audit.py    # n=6 consistency across spec/domain/engineering_pack/impact
+python3 verify/bom_lattice.py        # σ(6)=12 BOM reconciliation, total ≤ $35
+make -C build all                    # rebuild 3 PDFs (requires pandoc + xelatex + CJK font)
+make -C module/firmware all          # cross-compile firmware.elf (requires arm-none-eabi-gcc)
+pytest tests/ -v                     # acceptance scaffold; bench-only items skip with reason
+```
 
 ---
 
