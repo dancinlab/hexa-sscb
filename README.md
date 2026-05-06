@@ -117,7 +117,7 @@ pytest tests/ -v                     # acceptance scaffold; bench-only items ski
 | `verify/sscb_verify.py` | ✅ 10/10 PASS | §7.1 turnoff 266 ns / §7.9 BOM $31.50 / §7.10 schedule 12 mo |
 | `verify/cross_doc_audit.py` | ✅ 10/10 PASS | cutoff_ns ≡ 600, 4-foundry stack present in spec+domain+engpack, σ(6)=12, Mk-ladder monotone |
 | `verify/bom_lattice.py` | ✅ PASS | 19 engpack rows → σ(6)=12 lattice, total $30.77 ≤ $35 |
-| `pytest tests/` | ✅ 4 passed / 17 bench-skipped / 0 failed | A-2 / A-3 / A-8 + source-checklist auto-pass; T-1..T-9 / T-10 / A-1 / A-4..A-7 skip with bench reason |
+| `pytest tests/` | ✅ 5 passed / 16 bench-skipped / 0 failed | A-2 / A-3 / A-8 / A-9 (mk1-v1.0 tag) + source-checklist auto-pass; T-1..T-10 / A-1 / A-4..A-7 / A-10 skip with bench/handoff reason |
 | `make -C build all` | ✅ 3 PDFs built | `sscb_mk1.pdf` 98 KB · `_engineering_pack.pdf` 152 KB · `_impact.pdf` 58 KB (`.gitignore`'d, not committed) |
 | `module/firmware/` ARM cross-compile | ✅ `firmware.elf` 1996 B text · 3096 B BSS · ~5 KB total | `arm-none-eabi-gcc 16.1.0` (brew bare-metal) + `-ffreestanding` + repo-local `include/freestanding/stdint.h` shim — no newlib needed; on-target run still requires STM32F429 board + ST-Link |
 | `.own` schema | ✅ own 1/2/3 declared | n=6 master identity · 4-foundry contractual · doc-first scope guard |
@@ -157,6 +157,19 @@ Each slice is independently bench-falsifiable.
 - **GaN complement + AI cutoff prediction is Mk.V** (planned 2030-06-01).
 
 ---
+
+## Branches & tags
+
+| Ref | Status | Purpose |
+|---|---|---|
+| `main` | active | mk2 evolution (planned: 400 V / 200 A bidirectional, 500 ns cutoff, 2027-06-01) |
+| `mk1` | archival (frozen) | mk1 v1.0 preservation snapshot — never force-pushed |
+| tag `mk1-v1.0` | immutable | Paper-frozen mk1 design package as of 2026-05-06 |
+
+When you fetch this repo and want the exact mk1 deliverable used by the
+inaugural paper, check out `mk1-v1.0` or the `mk1` branch. The `main`
+branch will diverge as Mk.II work lands per
+[`module/impact/README.md`](module/impact/README.md) §21.mk2.
 
 ## Lineage
 

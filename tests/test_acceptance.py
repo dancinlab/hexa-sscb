@@ -138,10 +138,10 @@ def test_a9_v1_tag_or_freeze_marker():
         pytest.skip("A-9: git not available or not a git repo")
         return
     tags = [t.strip() for t in out.splitlines() if t.strip()]
-    if not any(re.match(r"^(v1\.|sscb-mk1-|hexa-sscb-mk1)", t) for t in tags):
+    if not any(re.match(r"^(v1\.|sscb-mk1-|hexa-sscb-mk1|mk1-v\d)", t) for t in tags):
         pytest.skip(
-            f"A-9: no v1.0 / sscb-mk1-* tag yet (tags: {tags or 'none'}) — "
-            f"create with `git tag -a v1.0 -m 'mk1 freeze'` once design v1.0 lands"
+            f"A-9: no v1.0 / mk1-v* / sscb-mk1-* tag yet (tags: {tags or 'none'}) — "
+            f"create with `git tag -a mk1-v1.0 -m 'mk1 freeze'` once design v1.0 lands"
         )
 
 
