@@ -13,9 +13,9 @@
 # Authoritative rule content remains in `own N <status> ...` blocks below.
 #
 # This repo is the public distribution form of HEXA-SSCB mk1, extracted from
-# n6-architecture/domains/compute/sscb/ on 2026-05-06 and renamed sscb →
+# canon/domains/compute/sscb/ on 2026-05-06 and renamed sscb →
 # hexa-sscb the same day. Source-of-truth for the spec stays upstream
-# (n6-architecture/domains/compute/sscb/sscb.md); this repo extracts a
+# (canon/domains/compute/sscb/sscb.md); this repo extracts a
 # frozen snapshot plus runnable artifacts (verify/, build/, tests/,
 # module/firmware/). Replaces the deleted ai-native/CLAUDE.md (per user
 # directive 2026-05-06: "claude.md 금지 -> .own 활용").
@@ -25,7 +25,7 @@
 # - claude opus / sonnet / haiku (AI agents — autonomous within own baselines)
 #
 # ## baselines
-# - n6-architecture canonical SSOT — extraction consumer (sync mapping in doc/lineage/origin.md)
+# - canon canonical SSOT — extraction consumer (sync mapping in doc/lineage/origin.md)
 # - core/sscb/ directory name preserved post-rename — must stay 1:1 with upstream domains/compute/sscb/
 # - doc/archive/* immutable verbatim (Korean predecessor + paper backup; never retranslate, never edit *.md.bak)
 # - doc-first repo with thin runnable surface (verify/ + build/ + tests/ + module/firmware/ only)
@@ -37,7 +37,7 @@
 # - core/sscb/domain.md = SSOT for numbers — module/* and code derive; if numbers disagree domain.md wins
 # - Mk-ladder monotone Mk.I→Mk.V — voltage/current increase, cutoff decrease, year increase; never insert Mk.X regression below an existing Mk
 # - additive-only at doc layer — additions OK, renames/moves require doc/lineage/origin.md update + redirect note
-# - upstream sync mapping: spec.md ↔ n6-architecture/papers/sscb-mk1-2026-05-04.md, domain.md ↔ domains/compute/sscb/sscb.md, impact ↔ same §21+§22; engineering_pack has no live upstream path (recover from history if needed)
+# - upstream sync mapping: spec.md ↔ canon/papers/sscb-mk1-2026-05-04.md, domain.md ↔ domains/compute/sscb/sscb.md, impact ↔ same §21+§22; engineering_pack has no live upstream path (recover from history if needed)
 #
 # ## cross_link_to_specs
 # - hive/spec/schema/own_v1.schema.yaml — THIS schema authority

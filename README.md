@@ -19,7 +19,7 @@
 [![Firmware: builds](https://img.shields.io/badge/firmware-cross--compile-brightgreen.svg)](module/firmware/)
 
 > **Distribution**: GitHub canonical at <https://github.com/need-singularity/hexa-sscb>.
-> Origin: extracted from `n6-architecture/domains/compute/sscb/` 2026-05-06.
+> Origin: extracted from `canon/domains/compute/sscb/` 2026-05-06.
 
 ---
 
@@ -79,7 +79,7 @@ hexa-sscb/
 
 The `core/<feature>/` + `module/<feature>/` + `README.ai.md` triplet follows
 **hive raw.mk2 arch.001** (collapsed from raw 270 / 271 / 272 / 273) — the
-canonical core-hierarchy pattern enforced across the n6-architecture sister
+canonical core-hierarchy pattern enforced across the canon sister
 repositories.
 
 ---
@@ -173,7 +173,7 @@ branch will diverge as Mk.II work lands per
 
 ## Lineage
 
-This repository is a **forensic extraction** from the n6-architecture
+This repository is a **forensic extraction** from the canon
 monorepo (2026-05-06). See [`doc/lineage/origin.md`](doc/lineage/origin.md)
 for the exact commits and source paths each file was pulled from. Two of
 the four source markdowns were recovered from a deletion commit

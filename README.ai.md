@@ -13,7 +13,7 @@
   - foundry_count ≡ τ(6) = 4
   - bom_lines ≡ σ(6) = 12
   - redundancy_depth ≡ φ(6) + τ(6) = 6
-- **Parent (canonical SSOT)**: `n6-architecture/domains/compute/sscb/sscb.md`
+- **Parent (canonical SSOT)**: `canon/domains/compute/sscb/sscb.md`
 - **Distribution**: `https://github.com/need-singularity/hexa-sscb` (public)
 
 ## Hierarchy (canonical pattern)
@@ -76,7 +76,7 @@ modules; cross-module references go through T1 (`core/sscb/`).
 
 ## Lineage tag
 
-This repo was extracted from `n6-architecture` on 2026-05-06.
+This repo was extracted from `canon` on 2026-05-06.
 Source commits: see [`doc/lineage/origin.md`](doc/lineage/origin.md).
 
 The Korean-language predecessor and a 2026-05-04 paper backup are preserved

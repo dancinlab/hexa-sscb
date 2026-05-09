@@ -16,11 +16,11 @@ Run:
     python3 verify/sscb_verify.py        # exit 0 = 10/10 PASS
 
 Source-of-truth for inputs:
-    n6-architecture/atlas/atlas.append.engineering-content-mk-next-2026-05-06.n6
+    canon/atlas/atlas.append.engineering-content-mk-next-2026-05-06.n6
         9 @L EE laws (Joule, Lenz, Weibull, Nyquist, etc.)
-    n6-architecture/atlas/atlas.append.hsscb-mk1-vendor-anchors-2026-05-06.n6
+    canon/atlas/atlas.append.hsscb-mk1-vendor-anchors-2026-05-06.n6
         SiC + driver + ADC + MCU + TVS + package vendor anchors
-    n6-architecture/atlas/atlas.append.hsscb-mk1-spec-derived-2026-05-07.n6
+    canon/atlas/atlas.append.hsscb-mk1-spec-derived-2026-05-07.n6
         spec-derived continuous-operation + budget constants
 
 Authority: own 1 (n=6 master identity); .own own 2 (4-foundry contractual);

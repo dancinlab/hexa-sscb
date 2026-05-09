@@ -8,9 +8,9 @@ circular-trap-free (non-traceable verification 차단) 검증 surface 의 입력
 alm_verify cross_prover diagonal 과 동일 가족.
 
 Sources (read-only, parse-only):
-    ~/core/n6-architecture/atlas/atlas.n6                                   본체
-    ~/core/n6-architecture/atlas/atlas.append.engineering-content-mk-next-2026-05-06.n6
-    ~/core/n6-architecture/atlas/atlas.append.hsscb-mk1-vendor-anchors-2026-05-06.n6
+    ~/core/canon/atlas/atlas.n6                                   본체
+    ~/core/canon/atlas/atlas.append.engineering-content-mk-next-2026-05-06.n6
+    ~/core/canon/atlas/atlas.append.hsscb-mk1-vendor-anchors-2026-05-06.n6
 
 Exposes:
     load_anchors() -> dict[id -> Entry]   모든 @P/@C/@L 항목
@@ -29,7 +29,7 @@ from pathlib import Path
 
 ATLAS_DIR = Path(os.environ.get(
     "HSSCB_ATLAS_DIR",
-    str(Path.home() / "core" / "n6-architecture" / "atlas"),
+    str(Path.home() / "core" / "canon" / "atlas"),
 ))
 
 ATLAS_FILES = [

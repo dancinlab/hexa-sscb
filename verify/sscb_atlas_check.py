@@ -13,9 +13,9 @@ Manifest source:
     ~/core/nexus/calc/hsscb_verify/manifest.jsonl
 
 Anchor sources (via verify/atlas_anchors.py):
-    ~/core/n6-architecture/atlas/atlas.n6                    n=6 primitives
-    ~/core/n6-architecture/atlas/atlas.append.engineering... universal physics laws
-    ~/core/n6-architecture/atlas/atlas.append.hsscb-mk1...   vendor datasheet anchors
+    ~/core/canon/atlas/atlas.n6                    n=6 primitives
+    ~/core/canon/atlas/atlas.append.engineering... universal physics laws
+    ~/core/canon/atlas/atlas.append.hsscb-mk1...   vendor datasheet anchors
 
 Run:
     python3 verify/sscb_atlas_check.py        # exit 0 = all pass

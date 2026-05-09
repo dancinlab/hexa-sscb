@@ -1,12 +1,12 @@
 # Origin & lineage
 
-This repository was extracted from the **n6-architecture** monorepo on
+This repository was extracted from the **canon** monorepo on
 **2026-05-06**. This document records the exact upstream commits and paths
 each file was pulled from, so that any change in this repo can be traced
 back to (or propagated upstream to) the source-of-truth.
 
 > **2026-05-06 (post-extraction)**: repository renamed `sscb` → `hexa-sscb`
-> on GitHub and locally. Upstream path `n6-architecture/domains/compute/sscb/`
+> on GitHub and locally. Upstream path `canon/domains/compute/sscb/`
 > and the local `core/sscb/` directory keep their original names — they are
 > the n=6 lattice identity reference and must remain 1:1 with the upstream
 > SSOT for sync purposes. Only the repo root and public-facing self-references
@@ -14,7 +14,7 @@ back to (or propagated upstream to) the source-of-truth.
 
 ## Upstream
 
-- Repo: `n6-architecture` (local working copy at `~/core/n6-architecture`)
+- Repo: `canon` (local working copy at `~/core/canon`)
 - Branch: `main`
 - Extraction date: 2026-05-06
 - Extractor: forensic recovery — two of four source markdowns were resurrected
@@ -49,7 +49,7 @@ back to (or propagated upstream to) the source-of-truth.
 
 - **Binary PDFs** (`sscb_mk1.pdf`, `sscb_mk1_engineering_pack.pdf`,
   `sscb_mk1_impact.pdf`) referenced as 986 KB / 1.2 MB / 404 KB shared via
-  KakaoTalk with expiration ~2026-05-01. **No git history** in n6-architecture,
+  KakaoTalk with expiration ~2026-05-01. **No git history** in canon,
   contact, papers, nexus, secret, save, or raw-archive-temp-clone contains
   any `sscb*.pdf` blob. **No on-disk copies** found anywhere under `~/core` or
   `~/Downloads` / `~/Desktop`. The Markdown sources in this repo are the
@@ -59,11 +59,11 @@ back to (or propagated upstream to) the source-of-truth.
 
 If you change a file in `core/sscb/` here and want to push it upstream:
 
-1. Reproduce the change in `n6-architecture/domains/compute/sscb/sscb.md`.
+1. Reproduce the change in `canon/domains/compute/sscb/sscb.md`.
 2. If the change is in `module/impact/`, propagate to `sscb.md` §21–§22.
 3. `module/engineering_pack/` has no live upstream path (it was deleted in
    `a489a368`); upstream recovery requires re-introducing the file to
-   `n6-architecture` first.
+   `canon` first.
 
 If you change a file in `doc/archive/`, **stop** — those are immutable
 snapshots and must not be edited.
