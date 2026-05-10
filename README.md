@@ -9,6 +9,7 @@
 > pack + impact ladder (Mk.I → Mk.V) + runnable verify/build/tests/firmware
 > surface. Silicon tape-out PLANNED.
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20102624.svg)](https://doi.org/10.5281/zenodo.20102624)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Spec: mk1](https://img.shields.io/badge/spec-mk1-informational.svg)](core/sscb/spec.md)
 [![Cutoff: 600 ns](https://img.shields.io/badge/cutoff-600ns-brightgreen.svg)](core/sscb/spec.md)
