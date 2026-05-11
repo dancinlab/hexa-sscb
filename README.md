@@ -19,7 +19,7 @@
 [![Audit: 10/10](https://img.shields.io/badge/audit-10%2F10-brightgreen.svg)](verify/cross_doc_audit.py)
 [![Firmware: builds](https://img.shields.io/badge/firmware-cross--compile-brightgreen.svg)](module/firmware/)
 
-> **Distribution**: GitHub canonical at <https://github.com/need-singularity/hexa-sscb>.
+> **Distribution**: GitHub canonical at <https://github.com/dancinlab/hexa-sscb>.
 > Origin: extracted from `canon/domains/compute/sscb/` 2026-05-06.
 
 ---

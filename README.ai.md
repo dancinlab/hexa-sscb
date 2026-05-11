@@ -14,7 +14,7 @@
   - bom_lines ≡ σ(6) = 12
   - redundancy_depth ≡ φ(6) + τ(6) = 6
 - **Parent (canonical SSOT)**: `canon/domains/compute/sscb/sscb.md`
-- **Distribution**: `https://github.com/need-singularity/hexa-sscb` (public)
+- **Distribution**: `https://github.com/dancinlab/hexa-sscb` (public)
 
 ## Hierarchy (canonical pattern)
 
